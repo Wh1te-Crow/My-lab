@@ -62,6 +62,25 @@ public:
 	void getData();
 	void change_Data();
 	student();
+	student operator =(const student& a)
+	{
+	student b;
+	delete []predmet;
+	delete []otchinka;
+	n=a.n;
+	age=a.age;
+	name1=a.name1;
+	name2=a.name2;
+	predmet=new string[n];
+	otchinka=new int[n];
+	for(int i=0;i<n;i++)
+	{
+		predmet[i]=a.predmet[i];
+		otchinka[i]=a.otchinka[i];
+	}	
+	return *this;
+	}
+
 	//the default constructor 
 	student(const student & s):human(s)
 	{
@@ -176,8 +195,8 @@ int main()
 		M.getData();
 		K.getData();
 		K.change_Data();
+		M=K;
 		M.getData();
-		K.getData();
 	}
 	else
 	{
