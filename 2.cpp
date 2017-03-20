@@ -13,14 +13,14 @@ class human
    human(string name1,string name2,int age);
    void getData();
    void zmina_age();
-   ~human();
+   virtual ~human();
 };
 //constructor for copy
 human::human(const human&s)
 {	
-age=s.age;
-name1=s.name1;
-name2=s.name2;
+	age=s.age;
+	name1=s.name1;
+	name2=s.name2;
 }
 //the default constructor
    human::human()
@@ -62,6 +62,9 @@ public:
 	void getData();
 	void change_Data();
 	student();
+	friend istream& operator>>(istream& s, student& a);
+	friend ostream& operator<<(ostream& s, const student& a);
+	//operator =
 	student operator =(const student& a)
 	{
 	student b;
@@ -84,18 +87,19 @@ public:
 	//the default constructor 
 	student(const student & s):human(s)
 	{
-	n=s.n;
-	predmet= new string[n];
- 	otchinka=new int[n];
- 	for(int i=0;i<n;i++)
-   	{   	
-	 predmet[i]=s.predmet[i];
-   	 otchinka[i]=s.otchinka[i];
-	}
+		n=s.n;
+		predmet= new string[n];
+ 		otchinka=new int[n];
+ 		for(int i=0;i<n;i++)
+  		{   	
+			predmet[i]=s.predmet[i];
+  		 	otchinka[i]=s.otchinka[i];
+		}
 	};
 	//constructor with parameter
 	student(string nam1,string nam2,int ag,string predme[],int*otchink,int u) : human(nam1,nam2,ag)
-	 {  n=u;
+	 {  
+	 	n=u;
   		predmet= new string[u];
  		otchinka=new int[u];
   		for(int i=0;i<u;i++)
@@ -107,15 +111,15 @@ public:
 };
 	//the default constructor
     student::student()
- {
-    n=2;
- 	predmet= new string[n];
- 	otchinka=new int[n];
- 	predmet[0]="Mathematical analysis";
- 	otchinka[0]=4;
- 	predmet[1]="Linear algebra";
- 	otchinka[1]=3;
- }
+	{
+   		 n=2;
+ 		predmet= new string[n];
+ 		otchinka=new int[n];
+	 	predmet[0]="Mathematical analysis";
+ 		otchinka[0]=4;
+	 	predmet[1]="Linear algebra";
+		otchinka[1]=3;
+	}
  	void student::change_Data()
  	{   
  		int vubo;
@@ -183,6 +187,35 @@ public:
 		delete []otchinka;
 		delete []predmet;
 	}
+	//in/out operator
+	ostream& operator<<(ostream& s, const student& a)
+	{
+		s << "student: " << a.name1 << " " << a.name2 <<endl;
+		for(int i=0;i<a.n;i++)
+		{
+			s<<a.predmet[i]<<" : "<<a.otchinka[i]<<endl;
+		}
+		return s;
+	}
+	istream& operator>>(istream& s, student& a)
+	{
+		delete []a.predmet;
+		delete []a.otchinka;
+		cout<<"Enter name/surname and age: ";
+		s>>a.name1>>a.name2>>a.age;
+		cout<<"Enter the number of items: ";
+		s>>a.n;
+		a.otchinka=new int[a.n];
+		a.predmet=new string[a.n];
+		for(int i=0;i<a.n;i++)
+		{
+			cout<<"subject "<<i+1<<" :";
+			s>>a.predmet[i];
+			cout<<"mark: ";
+			s>>a.otchinka[i];
+		}
+		return s;
+	}
 int main()
 {
 	bool vubor;
@@ -191,12 +224,14 @@ int main()
 	if (vubor)
 	{
 		student K;
-		student M(K);
+		cin>>K;
+		cout<<K;
+		/*student M(K);
 		M.getData();
 		K.getData();
 		K.change_Data();
 		M=K;
-		M.getData();
+		M.getData();*/
 	}
 	else
 	{
@@ -212,12 +247,12 @@ int main()
 		string*pr=new string[u];
 		cout<<"Enter subject/mark:"<<endl;
 		for(int i=0;i<u;i++)
-			{
+		{
 			cout<<"subject "<<i+1<<" :";
 			cin>>pr[i];
 			cout<<"mark: ";
 			cin>>ot[i];
-			}
+		}
 		student J(nam1,nam2,ag,&pr[0],&ot[0],u);
 		J.getData();
 		delete []pr; 
