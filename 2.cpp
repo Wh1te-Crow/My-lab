@@ -111,13 +111,37 @@ public:
 		cin>>vubo;
 		if(vubo)
  		{
+ 			int suma;
+ 			cout<<"Enter new syma subject number: ";
+ 			cin>>suma;
+ 			int*ot=new int[n];
+			string*pr=new string[n];
  			for(int i=0;i<n;i++)
  			{
- 				cout<<"subject "<<i<<" : ";
- 				cin>>predmet[i];
- 				cout<<"mark: ";
-				cin>>otchinka[i];
+ 				pr[i]=predmet[i];
+ 				ot[i]=otchinka[i];
 			}
+			delete []otchinka;
+			delete []predmet;
+			n=n+suma;
+			otchinka=new int[n];
+			predmet=new string[n];
+			for(int i=0;i<n;i++)
+			{
+				if(i<n-suma)
+				{
+					predmet[i]=pr[i];
+					otchinka[i]=ot[i];
+				}
+				else
+				{
+					cout<<"Enter new subject and mark "<<i+1<<" : ";
+					cin>>predmet[i];
+					cin>>otchinka[i];
+				}
+			}
+			delete []pr;
+			delete []ot;	
 		}
 		cout<<"Do you want change age true(1)/false(0): ";
  		cin>>vubo;
@@ -149,7 +173,6 @@ int main()
 	{
 		student K;
 		student M(K);
-		M.zmina_age();
 		M.getData();
 		K.getData();
 		K.change_Data();
