@@ -14,6 +14,14 @@ class human
    void getData();
    void zmina_age();
    virtual ~human();
+   //operator
+   human operator =(const human& a)
+   {
+   	age=a.age;
+	name1=a.name1;
+	name2=a.name2;
+	return *this;
+   }
 };
 //constructor for copy
 human::human(const human&s)
@@ -197,6 +205,7 @@ public:
 		}
 		return s;
 	}
+	//in operator
 	istream& operator>>(istream& s, student& a)
 	{
 		delete []a.predmet;
@@ -223,9 +232,13 @@ int main()
 	cin>>vubor;
 	if (vubor)
 	{
-		student K;
-		cin>>K;
-		cout<<K;
+		human s;
+		human g("Masha","Kol",19);
+		s=g;
+		s.getData();
+		//student K;
+		//cin>>K;
+		//cout<<K;
 		/*student M(K);
 		M.getData();
 		K.getData();
