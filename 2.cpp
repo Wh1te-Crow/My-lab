@@ -22,6 +22,19 @@ class human
 	name2=a.name2;
 	return *this;
    }
+   	//out operator
+	friend ostream& operator<<(ostream& s,const human& a)
+	{
+		s << "human: " << a.name1 << " " << a.name2 <<" :"<<a.age<<endl;
+		return s;
+	}
+	//in operator
+	friend istream& operator>>(istream& s, human& a)
+	{
+		cout<<"Enter name/surname and age: ";
+		s>>a.name1>>a.name2>>a.age;
+		return s;
+	}
 };
 //constructor for copy
 human::human(const human&s)
@@ -91,6 +104,7 @@ public:
 	}	
 	return *this;
 	}
+	
 
 	//the default constructor 
 	student(const student & s):human(s)
@@ -195,7 +209,7 @@ public:
 		delete []otchinka;
 		delete []predmet;
 	}
-	//in/out operator
+	//out operator
 	ostream& operator<<(ostream& s, const student& a)
 	{
 		s << "student: " << a.name1 << " " << a.name2 <<endl;
@@ -233,9 +247,10 @@ int main()
 	if (vubor)
 	{
 		human s;
+		cin>>s;
 		human g("Masha","Kol",19);
 		s=g;
-		s.getData();
+		cout<<s;
 		//student K;
 		//cin>>K;
 		//cout<<K;
