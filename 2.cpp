@@ -2,6 +2,47 @@
 #include <math.h>
 #include <string>
 using namespace std;
+template <class Type>
+class mass
+{
+public:
+	//mass();
+	mass(const mass<Type>& a);
+	mass(const int s);
+	~mass() {delete[]array;}
+	void getarray()
+	{
+		cout<<"Your array:"<<endl;
+		for(int i=0;i<size; i++)
+		{
+			cout<<"element("<<i+1<<"): "<<array[i]<<endl;
+		}
+	}
+		
+protected:
+	int	size;
+	Type* array;
+};
+/*template <class Type> mass<Type>::mass()
+{
+	size=1;
+	array=new Type[size];
+}*/
+template <class Type> mass<Type>::mass(const mass<Type>& a)
+{
+	size=a.size;
+	array=new Type[size];
+	for(int i=0;i<size; i++)
+	array[i]=a.array[i];
+}
+template<class Type> mass<Type>::mass(const int s)
+{
+	size=s;
+	array=new Type[size];
+	cout<<"Enter array: "<<endl;
+	for(int i=0;i<size;i++)
+	cin>>array[i];
+}
 class human
 { 
  protected:
@@ -14,7 +55,7 @@ class human
    void getData();
    void zmina_age();
    virtual ~human();
-   //operator
+   //operator =
    human operator =(const human& a)
    {
    	age=a.age;
@@ -246,11 +287,14 @@ int main()
 	cin>>vubor;
 	if (vubor)
 	{
-		human s;
-		cin>>s;
-		human g("Masha","Kol",19);
-		s=g;
-		cout<<s;
+		mass<float> m(2);
+		m.getarray();
+		mass<student> k(1);
+		k.getarray();
+		//cin>>s;*/
+		//human g("Masha","Kol",19);
+		//s=g;
+		//cout<<s;
 		//student K;
 		//cin>>K;
 		//cout<<K;
