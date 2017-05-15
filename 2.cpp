@@ -6,7 +6,6 @@ template <class Type>
 class mass
 {
 public:
-	//mass();
 	mass(const mass<Type>& a);
 	mass(const int s);
 	~mass() {delete[]array;}
@@ -23,11 +22,6 @@ protected:
 	int	size;
 	Type* array;
 };
-/*template <class Type> mass<Type>::mass()
-{
-	size=1;
-	array=new Type[size];
-}*/
 template <class Type> mass<Type>::mass(const mass<Type>& a)
 {
 	size=a.size;
@@ -287,8 +281,12 @@ int main()
 	cin>>vubor;
 	if (vubor)
 	{
+		//mass<char> n;
+	    //n.getarray();
 		mass<float> m(2);
 		m.getarray();
+		mass<string> jo(1);
+		jo.getarray();
 		mass<student> k(1);
 		k.getarray();
 		//cin>>s;*/
